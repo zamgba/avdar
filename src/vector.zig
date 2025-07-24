@@ -19,6 +19,14 @@ pub fn Vector3(comptime T: type, Calculator: type) type {
             self.y = Calculator.invert(self.y);
             self.z = Calculator.invert(self.z);
         }
+
+        pub inline fn componentProduct(self: *Self, rhs: Self) Self {
+            return Vector3(T, Calculator).init(
+                Calculator.mul(self.x, rhs.x),
+                Calculator.mul(self.y, rhs.y),
+                Calculator.mul(self.z, rhs.z),
+            );
+        }
     };
 
     return _V3;

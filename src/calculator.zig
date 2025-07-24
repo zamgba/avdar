@@ -1,17 +1,24 @@
-pub const F64Calculator = struct {
-    pub inline fn invert(v: f64) f64 {
-        return -v;
-    }
-};
+//! Calculator is a generic abstract to expose numeric calculations.
 
-pub const I32Calculator = struct {
-    pub inline fn invert(v: i32) i32 {
-        return -v;
-    }
-};
+fn NumericCalculator(comptime Num: type) type {
+    const Numeric = struct {
+        pub inline fn invert(v: Num) Num {
+            return -v;
+        }
 
-pub const I64Calculator = struct {
-    pub inline fn invert(v: i64) i64 {
-        return -v;
-    }
-};
+        pub inline fn mul(lhs: Num, rhs: Num) Num {
+            return lhs * rhs;
+        }
+    };
+
+    return Numeric;
+}
+
+// avdar supports only a limited number of calculators:
+// * f64:             The most common calculator
+// * i32 and i64:     OK for general use.
+// * fixed number:    For GBA platform (which does not support float)
+
+pub const F64Calculator = NumericCalculator(f64);
+pub const I32Calculator = NumericCalculator(i32);
+pub const I64Calculator = NumericCalculator(i64);
