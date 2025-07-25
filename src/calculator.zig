@@ -9,6 +9,10 @@ fn NumericCalculator(comptime Num: type) type {
         pub inline fn mul(lhs: Num, rhs: Num) Num {
             return lhs * rhs;
         }
+
+        pub inline fn add(lhs: Num, rhs: Num) Num {
+            return lhs + rhs;
+        }
     };
 
     return Numeric;
