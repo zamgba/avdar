@@ -38,11 +38,9 @@ pub fn Vector3(comptime T: type, Calculator: type) type {
 
         pub inline fn scalarProduct(self: Self, rhs: Self) T {
             // [x1,y1,z1] * [x1,y1,z1] = x1*x1+y1*y2+z1*z2
-            return C.add(
-                C.add(
-                    C.mul(self.x, rhs.x),
-                    C.mul(self.y, rhs.y),
-                ),
+            return C.add3(
+                C.mul(self.x, rhs.x),
+                C.mul(self.y, rhs.y),
                 C.mul(self.z, rhs.z),
             );
         }
